@@ -1,6 +1,6 @@
 # Breast Cancer Detection ML Model
 
-A machine learning model for breast cancer detection using Principal Component Analysis (PCA) for feature reduction and optimization. This project demonstrates the application of machine learning techniques in medical diagnosis.
+A machine learning model for breast cancer detection using Principal Component Analysis (PCA) for feature reduction and optimization. This project implements a robust pipeline for processing medical data and identifying potential cancer cases through advanced dimensionality reduction techniques.
 
 ## Features
 
@@ -8,18 +8,22 @@ A machine learning model for breast cancer detection using Principal Component A
 - Feature extraction using PCA
 - Binary classification (Malignant vs Benign)
 - Comprehensive data visualization
+- Modular code structure
 - High model accuracy and reliability
 
 ## Project Structure
 
 ```
 .
-├── src/                # Source code
-│   └── cancer_detection.py  # Main ML model implementation
-├── data/              # Dataset directory
-├── notebooks/         # Jupyter notebooks for analysis
-├── tests/             # Unit tests
-└── requirements.txt   # Project dependencies
+├── src/                    # Source code
+│   ├── preprocessing.py    # Data cleaning and preparation
+│   ├── feature_extraction.py # PCA implementation
+│   ├── visualization.py    # Data visualization functions
+│   └── main.py            # Main execution script
+├── data/                  # Dataset directory
+│   └── Cancer_Data.csv    # Breast cancer dataset
+├── requirements.txt       # Project dependencies
+└── README.md             # Project documentation
 ```
 
 ## Installation
@@ -35,32 +39,45 @@ cd breast-cancer-detection
 pip install -r requirements.txt
 ```
 
+3. Download the dataset:
+```bash
+kaggle datasets download erdemtaha/cancer-data -p data/
+cd data && unzip cancer-data.zip
+```
+
 ## Usage
 
-1. Place your dataset in the `data/` directory
-2. Run the model:
-```python
-from src.cancer_detection import *
-
-# Load and preprocess data
-data = pd.read_csv('data/Cancer_Data.csv')
-cleaned_data = drop_nan_columns(data)
-
-# Split features and labels
-X, y = split_features_and_labels(cleaned_data)
-
-# Perform PCA
-X_pca = perform_PCA(X)
+Run the main script to execute the complete pipeline:
+```bash
+python src/main.py
 ```
+
+This will:
+1. Load and clean the dataset
+2. Extract features using PCA
+3. Generate visualizations of the results
+
+## Module Description
+
+- `preprocessing.py`: Handles data cleaning and preparation, including NaN removal and feature/label splitting
+- `feature_extraction.py`: Implements PCA for dimensionality reduction with standardization
+- `visualization.py`: Creates visualizations of the PCA results
+- `main.py`: Orchestrates the complete machine learning pipeline
 
 ## Technologies Used
 
 - Python 3.8+
-- Pandas
-- NumPy
-- Scikit-learn
-- Matplotlib
-- Seaborn
+- Pandas for data manipulation
+- NumPy for numerical operations
+- Scikit-learn for PCA and preprocessing
+- Matplotlib and Seaborn for visualization
+
+## Results
+
+The model achieves dimensionality reduction while preserving over 60% of the variance in the data, making it effective for:
+- Visualization of high-dimensional medical data
+- Feature reduction for downstream machine learning tasks
+- Pattern identification in cancer diagnosis
 
 ## Contributing
 
